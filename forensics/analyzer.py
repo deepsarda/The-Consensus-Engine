@@ -34,7 +34,7 @@ class ForensicAnalyzer:
         freq_res = self.freq_tool.analyze(media_path, claim_text)
 
         # search_res = self.search_tool.analyze(media_path, claim_text)
-        
+
         return {
             "Deepfake_Detector": deepfake_res,
             # "Reverse_Image_Search": search_res,

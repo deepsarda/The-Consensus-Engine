@@ -6,3 +6,8 @@ google-genai
 duckduckgo-search
 transformers
 torch
+Flask
+Flask-CORS
+Flask-SocketIO
+python-socketio
+python-engineio

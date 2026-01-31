@@ -218,3 +218,7 @@ __marimo__/
 libs/
 
 node_modules/
+
+temp_uploads/
+
+.DS_Store

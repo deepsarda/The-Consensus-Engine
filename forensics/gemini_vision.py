@@ -1,6 +1,7 @@
 from typing import Dict, Any
 from .base import ForensicTool
 from google import genai
+from google.genai import types
 import os
 import PIL.Image
 
@@ -33,7 +34,7 @@ This image is a low-resolution, wide-angle photograph capturing a scene that app
         try:
             client = genai.Client(api_key=api_key)
 
-            model_name = "gemini-3-flash-preview"
+            model_name = "gemini-2.5-flash"
 
             img = PIL.Image.open(media_path)
 
@@ -45,7 +46,9 @@ This image is a low-resolution, wide-angle photograph capturing a scene that app
             response = client.models.generate_content(
                 model=model_name,
                 contents=[prompt, img],
-                tools="google_search_retrieval",
+                config=types.GenerateContentConfig(
+                    tools=[types.Tool(google_search=types.GoogleSearch())],
+                ),
             )
 
             text = response.text
