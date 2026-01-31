@@ -1,3 +1,8 @@
 requests
 python-dotenv
 termcolor
+Pillow
+google-genai
+duckduckgo-search
+transformers
+torch

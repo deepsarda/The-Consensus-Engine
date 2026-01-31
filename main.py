@@ -22,7 +22,7 @@ def main():
         claim = (
             "Breaking: A shark swimming in a flooded subway station during the storm!"
         )
-        media_path = "/path/to/shark_subway.jpg"
+        media_path = "./shark.jpeg"
         media_type = "Image"
     elif args.claim and args.image:
         claim = args.claim
@@ -37,6 +37,7 @@ def main():
 
     analyzer = ForensicAnalyzer()
     forensics = analyzer.run_all(media_path, claim)
+
     print(json.dumps(forensics, indent=2))
 
     print(colored("\n[2] Convening the Council of LLMs...", "yellow"))

@@ -22,6 +22,9 @@ class DeepfakeDetector(ForensicTool):
             "tool": "Deepfake_Detector",
             "fake_prob": round(prob, 2),
             "verdict": (
-                "Likely Real Camera Image" if prob < 0.5 else "Likely AI-Generated"
+                "NOTE: THIS IS A SIMULATED RESULT. DO NOT USE FOR REAL ANALYSIS. "
+                "Likely Real Camera Image"
+                if prob < 0.5
+                else "Likely AI-Generated"
             ),
         }
