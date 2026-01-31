@@ -62,7 +62,7 @@ const JudgeView = ({ data }) => {
 						</div>
 					</div>
 
-					<div className="w-full md:w-auto bg-slate-950/80 rounded-lg p-6 border border-slate-800 space-y-4 min-w-[200px] shrink-0">
+					<div className="w-full md:w-auto bg-slate-950/80 rounded-lg p-6 border border-slate-800 space-y-4 min-w-50 shrink-0">
 						<div>
 							<div className="text-xs text-slate-500 uppercase mb-1">
 								Confidence

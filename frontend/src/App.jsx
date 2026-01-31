@@ -71,17 +71,17 @@ function App() {
 	};
 
 	return (
-		<div className="min-h-screen bg-slate-950 text-white selection:bg-cyan-500/30 font-inter">
-			<div className="container mx-auto px-4 py-8">
-				<header className="mb-12 flex items-center justify-between">
+		<div className="h-screen bg-slate-950 text-white selection:bg-cyan-500/30 font-inter flex flex-col">
+			<header className="flex items-center justify-between p-5 shrink-0">
 					<div className="flex items-center gap-3">
 						<div className="w-8 h-8 rounded bg-linear-to-br from-cyan-400 to-blue-600 shadow-lg shadow-cyan-500/20"></div>
 						<h1 className="text-xl font-bold tracking-wide text-slate-200">
 							THE CONSENSUS ENGINE
 						</h1>
 					</div>
-				</header>
+			</header>
 
+			<div className="container mx-auto px-4 overflow-y-auto grow">
 				<AnimatePresence mode="wait">
 					{status === "idle" && (
 						<motion.div
