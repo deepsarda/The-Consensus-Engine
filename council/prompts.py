@@ -27,7 +27,7 @@ MASTER_PROMPT = """
    - **Interpretation:** Looks for "Clickbait", "Fear-mongering", "Shouting" (Caps), and vague sourcing ("Experts say"). High risk scores suggest manipulation of emotion.
 
 5. **[Gemini_Vision]**
-   - **Purpose:** An advanced AI that "looks" at the image to describe it in detail and find logical anomalies (e.g., shadows wrong, text gibberish). It also gives information about current stuff.
+   - **Purpose:** An advanced AI that "looks" at the image to describe it in detail and find logical anomalies (e.g., shadows wrong, text gibberish). It also gives information about the earliest known source of this image. It also gives context around the image,
 
 6. **[Metadata_Analysis]**
    - **Purpose:** Extracts EXIF data.
