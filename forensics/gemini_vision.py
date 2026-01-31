@@ -34,13 +34,32 @@ This image is a low-resolution, wide-angle photograph capturing a scene that app
         try:
             client = genai.Client(api_key=api_key)
 
-            model_name = "gemini-2.5-flash" #gemini-3-flash-preview
+            model_name = (
+                "gemini-3-flash-preview"  # "gemini-2.5-flash"  # gemini-3-flash-preview
+            )
 
             img = PIL.Image.open(media_path)
 
-            prompt = (
+            """prompt = (
                 "Describe this image in insane detail. Mention every object, text, color, lighting, texture, and potential anomaly you see. "
-                "Also search for similar images on the internet and find refrences to this image and tell me their outputs."
+                "Also search for similar images on the internet and find references to this image and tell me their outputs. The caption for this image is: "
+                + claim_text
+            )"""
+
+            prompt = (
+                "Act as a Forensic Image Analyst. Your goal is to look for issues in the image.\n\n"
+                f'CLAIM: "{claim_text}"\n\n'
+                "## Phase 1: Visual Forensics\n"
+                "Describe the image with extreme precision and insane amount of details (mention every object, text, color, lighting, texture, and potential anomaly you see):\n"
+                "- **Text/Language:** Extract any visible text (signs, badges, license plates) and translate if necessary.\n"
+                "- **Geolocators:** Identify landmarks, architecture, street signs, or vegetation that indicate location.\n"
+                "- **Temporal Indicators:** Look for car models, technology, or weather that suggest a specific time period.\n"
+                "- **Manipulation Check:** Scrutinize shadows, reflections, and hands/faces for signs of AI generation or Photoshop.\n\n"
+                "## Phase 2: Contextual Search\n"
+                "Use your browsing tools to perform a reverse image search or search for the visual details you identified.\n"
+                "- Find the **earliest known source** of this image.\n"
+                "- Identify the original context (who took it, when, and where, and other information).\n"
+                "- Check if this image has been debunked by fact-checkers previously.\n\n"
             )
 
             response = client.models.generate_content(

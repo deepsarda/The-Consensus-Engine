@@ -73,7 +73,8 @@ class LLMClient:
                 full_prompt += f"--- {role} ---\n{content}\n\n"
 
             response = client.models.generate_content(
-                model="gemini-2.5-flash-lite",
+                # model="gemini-2.5-flash",
+                model="gemini-3-flash-preview",
                 contents=full_prompt,
                 config={"response_mime_type": "application/json"},
             )

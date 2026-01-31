@@ -21,7 +21,8 @@ const JudgeView = ({ data }) => {
 		currentVerdict?.toLowerCase().includes("true");
 	const isFake =
 		currentVerdict?.toLowerCase().includes("fake") ||
-		currentVerdict?.toLowerCase().includes("misinformation");
+		currentVerdict?.toLowerCase().includes("misinformation") ||
+		currentVerdict?.toLowerCase().includes("mislabeled");
 
 	const theme = isSafe
 		? { border: "border-green-500", text: "text-green-400", bg: "bg-green-950" }
@@ -42,7 +43,7 @@ const JudgeView = ({ data }) => {
 			className={`border-2 ${theme.border} bg-black/60 relative overflow-hidden shadow-[0_0_30px_rgba(0,0,0,0.5)]`}
 		>
 			{/* Scanlines for the judge card */}
-			<div className="absolute inset-0 pointer-events-none opacity-20 bg-[linear-gradient(transparent_2px,var(--color-bg)_2px)] bg-[size:100%_4px]"></div>
+			<div className="absolute inset-0 pointer-events-none opacity-20 bg-[linear-gradient(transparent_2px,var(--color-bg)_2px)] bg-size-[100%_4px]"></div>
 
 			<div
 				className={`absolute top-0 left-0 w-full h-1 ${isSafe ? "bg-green-500 shadow-[0_0_10px_#22c55e]" : isFake ? "bg-red-500 shadow-[0_0_10px_#ef4444]" : "bg-yellow-500 shadow-[0_0_10px_#eab308]"}`}

@@ -3,18 +3,30 @@ from typing import List, Dict, Any
 from council.llm_client import LLMClient
 import config
 from utils.reply_processing import process_content_return_ouput_json
+import datetime
 
 JUDGE_PROMPT = """
 ### Role: The Adjudicator Agent
+
+**Date: ** {curent_date}
 You are the final Judge in a misinformation consensus system.
 You have received analysis from 3 different AI models (The Council) regarding a claim and forensic evidence.
 
 **Your Goal:**
-1. Evaluate the reasoning of each model.
-2. Discard models that hallucinate evidence or use subjective logic (e.g., "it looks cool").
-3. Keep models that cite the provided Forensic Evidence (Deepfake scores, Search results, CLIP scores).
-4. Aggregate the confidence of the VALID models.
-5. Write a final explanation based ONLY on valid reasoning.
+1.  **Evaluate Reasoning:** Critique the reasoning of each model.
+2.  **Filter Models:**
+    *   **DISCARD** models that hallucinate evidence, use subjective logic (e.g., "it looks cool"), or ignore clear forensic data.
+    *   **KEEP** models that correctly cite the provided Forensic Evidence (Deepfake scores, Search results, CLIP scores).
+    *   *Note: Ignore Deepfake_Detector outputs for non-face images.*
+3.  **Aggregate Confidence:** Calculate the average confidence of only the VALID models.
+4.  **Synthesize Explanation:** Write a final user-facing verdict following the specific guidelines below.
+
+**Explanation Generation Guidelines:**
+*   **Nuance is Critical:** You must distinguish between "Fake Media" (AI/Photoshop) and "Misattributed Media" (Real photo, wrong caption).
+*   **If Misattributed:** Explicitly state: "The media is real/authentic, but the caption/context is false." Explain the true origin versus the claimed origin.
+*   **If Accurate:** Provide an in-depth verification. Don't just say "It's true"—explain the specific date, location, and event confirming the caption.
+*   **Context:** Always provide broader background context about the image and the claim.
+*   **Formatting:** Use Markdown (bolding, lists) to structure the text for readability.
 
 **Forensic Evidence Provided:**
 {forensic_evidence}
@@ -23,18 +35,19 @@ You have received analysis from 3 different AI models (The Council) regarding a 
 {council_outputs}
 
 **Output strictly in JSON:**
+(Ensure all Markdown in the 'explanation' field is properly escaped for JSON, e.g., use \n for newlines)
+
 {{
   "model_evaluations": [
     {{
       "model": "Model A",
       "status": "KEEP/DISCARD",
-      "reason": "Cited search evidence correctly."
-    }},
-    ...
+      "reason": "Cited search evidence correctly regarding the original date of the image."
+    }}
   ],
-  "final_verdict": "Real/Misinformation/Inconclusive",
+  "final_verdict": "Real/Misinformation/Inconclusive/Mislabeled",
   "aggregated_confidence": 98.5,
-  "explanation": "Final user-facing text..."
+  "explanation": "## Verdict: Mislabeled\n\n### Analysis\nAlthough the image is **authentic** and has not been digitally altered, it is being shared with a false narrative.\n\n* **True Context:** The image was actually taken in [Year] at [Location].\n* **Claimed Context:** The caption incorrectly claims this shows [False Event].\n\n### Conclusion\nThe media is real, but the attribution is false."
 }}
 """
 
@@ -60,8 +73,11 @@ class JudgeAgent:
         formatted_forensics = json.dumps(forensic_data, indent=2)
         formatted_council = json.dumps(valid_inputs, indent=2)
 
+        today = datetime.date.today()
         prompt = JUDGE_PROMPT.format(
-            forensic_evidence=formatted_forensics, council_outputs=formatted_council
+            forensic_evidence=formatted_forensics,
+            council_outputs=formatted_council,
+            curent_date=today.strftime("%B %d, %Y"),
         )
 
         messages = [

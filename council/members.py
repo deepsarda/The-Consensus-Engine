@@ -8,6 +8,7 @@ import sys
 import os
 import re
 import config
+from datetime import date
 
 # Thinking regex
 thinking_regex = re.compile(r"<think>.*?</think>", re.DOTALL)
@@ -25,9 +26,11 @@ class CouncilMember:
         """
         Sends the claim and forensic data to this specific LLM member.
         """
+        today = date.today()
         formatted_forensics = json.dumps(forensic_data, indent=2)
         prompt = MASTER_PROMPT.format(
             name=self.name,
+            current_date=today.strftime("%B %d, %Y"),
             actual_user_claim=claim,
             media_type=media_type,
             actual_forensic_data_dump=formatted_forensics,
