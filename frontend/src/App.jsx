@@ -71,14 +71,31 @@ function App() {
 	};
 
 	return (
-		<div className="h-screen bg-slate-950 text-white selection:bg-cyan-500/30 font-inter flex flex-col">
-			<header className="flex items-center justify-between p-5 shrink-0">
-					<div className="flex items-center gap-3">
-						<div className="w-8 h-8 rounded bg-linear-to-br from-cyan-400 to-blue-600 shadow-lg shadow-cyan-500/20"></div>
-						<h1 className="text-xl font-bold tracking-wide text-slate-200">
+		<div className="mh-screen text-slate-200 font-body flex flex-col relative overflow-hidden">
+			{/* Background Effects */}
+			<div className="retro-grid">
+				<div className="grid-plane"></div>
+			</div>
+			<div className="particles"></div>
+			<div className="crt-overlay"></div>
+
+			<header className="flex items-center justify-between p-6 shrink-0 relative z-10 border-b border-cyan-500/20 backdrop-blur-sm">
+				<div className="flex items-center gap-4">
+					<div className="w-10 h-10 rounded-sm bg-cyan-500/10 border border-cyan-500 shadow-[0_0_15px_rgba(34,211,238,0.3)] flex items-center justify-center">
+						<span className="text-cyan-400 font-display text-2xl">CE</span>
+					</div>
+					<div>
+						<h1
+							className="text-2xl font-display font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 glitch-text"
+							data-text="THE CONSENSUS ENGINE"
+						>
 							THE CONSENSUS ENGINE
 						</h1>
+						<div className="text-[10px] text-slate-400 font-mono tracking-[0.2em] uppercase">
+							System v0.1 <span className="text-green-400">// Online</span>
+						</div>
 					</div>
+				</div>
 			</header>
 
 			<div className="container mx-auto px-4 overflow-y-auto grow">
@@ -100,7 +117,7 @@ function App() {
 							key="results"
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
-							className="max-w-4xl mx-auto space-y-8"
+							className="max-w-4xl mx-auto space-y-8 pt-4"
 						>
 							<div className="flex items-center justify-between">
 								<h2 className="text-3xl font-bold bg-clip-text text-transparent bg-linear-to-r from-white to-slate-400">

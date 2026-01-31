@@ -26,51 +26,55 @@ const MemberCard = ({ member, index }) => {
 	const reasoningText = member.output?.reasoning;
 
 	const verdictColor = member.output?.verdict?.toLowerCase().includes("fact")
-		? "text-green-400 bg-green-950/30 border-green-900/50"
+		? "text-green-400 border-green-500/50 shadow-[0_0_10px_rgba(34,197,94,0.2)]"
 		: member.output?.verdict?.toLowerCase().includes("misinformation") ||
 				member.output?.verdict?.toLowerCase().includes("fake")
-			? "text-red-400 bg-red-950/30 border-red-900/50"
-			: "text-yellow-400 bg-yellow-950/30 border-yellow-900/50";
+			? "text-red-400 border-red-500/50 shadow-[0_0_10px_rgba(239,68,68,0.2)]"
+			: "text-yellow-400 border-yellow-500/50 shadow-[0_0_10px_rgba(234,179,8,0.2)]";
 
 	return (
 		<motion.div
 			initial={{ opacity: 0, y: 20 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ delay: index * 0.1 }}
-			className="bg-slate-900/60 backdrop-blur border border-slate-700 rounded-xl overflow-hidden hover:border-slate-500 transition-colors flex flex-col h-full"
+			className="bg-black/50 backdrop-blur border border-cyan-500/30 overflow-hidden hover:border-cyan-400/60 transition-colors flex flex-col h-full group clip-path-angle relative"
 		>
-			<div className="p-5 flex-1">
-				<div className="flex justify-between items-start mb-4 gap-4">
-					<div className="flex items-center gap-3">
-						<div className="w-10 h-10 rounded-full bg-slate-800 border border-slate-600 flex items-center justify-center font-bold text-slate-300 shrink-0">
-							{member.member_name.split(" ")[1] || member.member_name.charAt(0)}
-						</div>
-						<div>
-							<h3 className="font-bold text-white leading-tight">
+			<div className="absolute top-0 right-0 p-1 opacity-50 group-hover:opacity-100 transition-opacity">
+				<div className="w-2 h-2 bg-current text-cyan-500"></div>
+			</div>
+
+			<div className="p-5 flex-1 relative z-10">
+				<div className="flex flex-col sm:flex-row justify-between items-start mb-4 gap-3">
+					<div className="flex items-center gap-3 min-w-0">
+						
+						<div className="min-w-0">
+							<h3 className="font-display font-bold text-slate-200 leading-tight uppercase tracking-wider truncate">
 								{member.member_name}
 							</h3>
-							<div className="text-xs text-slate-500 uppercase tracking-wider">
-								Council Member
+							<div className="text-[10px] text-cyan-600 uppercase tracking-[0.2em]">
+								// Council_Unit_{index + 1}
 							</div>
 						</div>
 					</div>
 					<div
-						className={`px-2 py-1 rounded text-[10px] font-bold border uppercase tracking-wider shrink-0 ${verdictColor}`}
+						className={`px-2 py-0.5 text-[10px] font-bold border uppercase tracking-wider shrink-0 ${verdictColor} bg-black/50 self-start sm:self-auto max-w-full truncate`}
 					>
-						{member.output?.verdict || "PENDING"}
+						{member.output?.verdict || "ANALYZING..."}
 					</div>
 				</div>
 
 				<div className="mb-6">
-					<div className="flex justify-between text-xs text-slate-500 mb-1">
-						<span>Confidence</span>
+					<div className="flex justify-between text-[10px] font-mono text-cyan-600 mb-1 uppercase">
+						<span>Calculation_Confidence</span>
 						<span>{member.output?.confidence_score}%</span>
 					</div>
-					<div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+					<div className="w-full bg-slate-900 h-1 overflow-hidden relative">
 						<div
-							className={`h-full ${verdictColor.split(" ")[0].replace("text", "bg").replace("-400", "-500")}`}
+							className={`h-full ${verdictColor.split(" ")[0].replace("text", "bg")}`}
 							style={{ width: `${member.output?.confidence_score}%` }}
 						></div>
+						{/* Progress Bar Scanline */}
+						<div className="absolute inset-0 bg-white/20 animate-[loading_1s_ease-in-out_infinite] w-full transform -translate-x-full"></div>
 					</div>
 				</div>
 
@@ -78,9 +82,9 @@ const MemberCard = ({ member, index }) => {
 					<div className="space-y-4">
 						<button
 							onClick={() => setExpanded(!expanded)}
-							className="w-full flex items-center justify-between text-xs font-bold text-slate-400 uppercase tracking-widest hover:text-white transition-colors bg-slate-950/30 p-2 rounded border border-slate-800"
+							className="w-full flex items-center justify-between text-xs font-mono font-bold text-cyan-500/70 uppercase tracking-widest hover:text-cyan-400 transition-colors bg-cyan-950/10 p-2 border border-cyan-500/20 hover:bg-cyan-950/30"
 						>
-							<span>Analysis Trace ({steps.length} Steps)</span>
+							<span>&gt; Trace_Log [{steps.length}]</span>
 							<span className="text-lg leading-none">
 								{expanded ? "−" : "+"}
 							</span>
@@ -94,7 +98,7 @@ const MemberCard = ({ member, index }) => {
 									exit={{ height: 0, opacity: 0 }}
 									className="overflow-hidden"
 								>
-									<div className="pt-4 pb-2 border-t border-slate-800 mt-2">
+									<div className="pt-4 pb-2 border-t border-cyan-900/50 mt-2 font-mono text-xs">
 										{Array.isArray(steps) &&
 											steps.map((step, idx) =>
 												typeof step === "object" ? (
@@ -103,8 +107,9 @@ const MemberCard = ({ member, index }) => {
 											)}
 									</div>
 									{member.output?.conclusion && (
-										<div className="bg-slate-950/50 p-3 rounded border border-slate-800 text-sm text-slate-300 mt-2 italic">
-											"{member.output.conclusion}"
+										<div className="bg-cyan-950/20 p-3 border-l-2 border-cyan-500 text-xs text-slate-300 mt-2 font-mono">
+											<span className="text-cyan-500 mr-2">&gt;&gt;</span>"
+											{member.output.conclusion}"
 										</div>
 									)}
 								</motion.div>
@@ -112,7 +117,7 @@ const MemberCard = ({ member, index }) => {
 						</AnimatePresence>
 					</div>
 				) : (
-					<div className="text-sm text-slate-300 prose prose-invert">
+					<div className="text-sm text-slate-300 prose prose-invert font-mono text-xs">
 						<ReactMarkdown>{reasoningText}</ReactMarkdown>
 					</div>
 				)}
@@ -120,13 +125,12 @@ const MemberCard = ({ member, index }) => {
 
 			{!expanded && steps && (
 				<div className="px-5 pb-5 pt-0">
-					<div className="text-sm text-slate-400 italic max-h-64 overflow-y-auto">
-						"
+					<div className="text-xs text-slate-500 font-mono max-h-64 overflow-y-auto pl-2 border-l border-slate-800">
+						<span className="text-slate-600 mr-1">&gt;</span>
 						{member.output?.conclusion ||
 							(steps[0]?.observation
 								? steps[0].observation.substring(0, 100) + "..."
 								: "")}
-						"
 					</div>
 				</div>
 			)}

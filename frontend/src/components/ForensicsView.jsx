@@ -84,28 +84,40 @@ const ForensicCard = ({ title, data, delay }) => {
 			initial={{ opacity: 0, y: 10 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ delay: delay * 0.1 }}
-			className="bg-slate-900/40 p-5 rounded-xl border border-slate-700/50 hover:border-slate-500/50 transition-colors shadow-sm overflow-hidden"
+			className="bg-black/40 p-4 border border-cyan-500/30 hover:border-cyan-500/70 transition-colors relative overflow-hidden group"
 		>
-			<div className="text-xs font-bold text-cyan-400 uppercase tracking-widest mb-4 border-b border-slate-800 pb-2 flex justify-between items-center">
-				{title}
+			<div className="absolute top-0 right-0 p-1">
+				<div className="w-2 h-2 bg-cyan-500/20 group-hover:bg-cyan-400 transition-colors"></div>
+			</div>
+
+			<div className="text-xs font-bold text-cyan-400 uppercase tracking-widest mb-4 border-b border-cyan-800 pb-2 flex justify-between items-center font-display">
+				<span>[{title}]</span>
 				{parsedData.verdict && (
-					<span className="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded border border-slate-700">
+					<span
+						className={`text-[10px] px-2 py-0.5 border ${
+							parsedData.verdict === "REAL"
+								? "border-green-500 text-green-400 bg-green-900/20"
+								: parsedData.verdict === "FAKE"
+									? "border-red-500 text-red-500 bg-red-900/20"
+									: "border-cyan-500 text-cyan-400 bg-cyan-900/20"
+						}`}
+					>
 						{parsedData.verdict}
 					</span>
 				)}
 			</div>
 
-			<div className="space-y-3">
+			<div className="space-y-3 font-mono text-xs">
 				{Object.entries(parsedData).map(([key, value]) => {
 					// Skip redundant keys
 					if (key === "tool" || key === "verdict") return null;
 
 					return (
 						<div key={key}>
-							<div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">
+							<div className="text-slate-500 uppercase tracking-wider mb-1 text-[10px]">
 								{formatKey(key)}
 							</div>
-							<div className="text-sm">
+							<div className="pl-2 border-l border-cyan-900 group-hover:border-cyan-500/50 transition-colors">
 								<DataNode value={value} />
 							</div>
 						</div>
@@ -119,17 +131,19 @@ const ForensicCard = ({ title, data, delay }) => {
 const ForensicsView = ({ data }) => {
 	if (!data) return null;
 	return (
-		<div className="bg-slate-950/30 rounded-xl border border-slate-800 overflow-hidden">
-			<div className="p-4 bg-slate-900/50 border-b border-slate-800 flex justify-between items-center">
-				<h4 className="font-bold text-slate-200">Evidence Analysis</h4>
+		<div className="relative">
+			<div className="p-4 border-b border-cyan-900/50 flex justify-between items-center mb-4">
+				<h4 className="font-display font-bold text-lg text-cyan-400 tracking-wider">
+					// EVIDENCE_ANALYSIS_LOG
+				</h4>
 				<div className="flex gap-2">
-					<div className="hidden sm:block text-xs font-mono text-slate-500">
-						{Object.keys(data).length} TOOLS RAN
+					<div className="hidden sm:block text-xs font-mono text-cyan-600 animate-pulse">
+						Process_ID: {Math.floor(Math.random() * 99999)}
 					</div>
 				</div>
 			</div>
 
-			<div className="p-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
+			<div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 				{Object.entries(data).map(([key, value], idx) => (
 					<ForensicCard
 						key={key}

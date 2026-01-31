@@ -34,7 +34,7 @@ This image is a low-resolution, wide-angle photograph capturing a scene that app
         try:
             client = genai.Client(api_key=api_key)
 
-            model_name = "gemini-2.5-flash"
+            model_name = "gemini-2.5-flash" #gemini-3-flash-preview
 
             img = PIL.Image.open(media_path)
 

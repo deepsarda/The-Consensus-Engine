@@ -1,12 +1,269 @@
 @import "tailwindcss";
 
 :root {
-	background-color: #0f172a; /* Slate 900 */
-	color: white;
-	font-family: "Inter", sans-serif;
+	--color-bg: #050a14;
+	--color-grid: rgba(34, 211, 238, 0.4); /* Cyan 400, higher opacity */
+	--color-text-main: #e2e8f0;
+	--color-text-dim: #94a3b8;
+	--color-neon-cyan: #22d3ee;
+	--color-neon-blue: #3b82f6;
+	--color-neon-purple: #a855f7;
+
+	--font-display: "VT323", monospace;
+	--font-body: "Share Tech Mono", monospace;
 }
 
 body {
 	margin: 0;
 	min-height: 100vh;
+	background-color: var(--color-bg);
+	color: var(--color-text-main);
+	font-family: var(--font-body);
+	overflow-x: hidden;
+}
+
+/* --- Retro Grid Background --- */
+.retro-grid {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: -2;
+	perspective: 1000px;
+	overflow: hidden;
+	background: radial-gradient(circle at center, #1e293b 0%, #020617 100%);
+}
+
+.grid-plane {
+	position: absolute;
+	top: 0;
+	left: -50%;
+	width: 200%;
+	height: 200%;
+	background-image:
+		linear-gradient(var(--color-grid) 1px, transparent 1px),
+		linear-gradient(90deg, var(--color-grid) 1px, transparent 1px);
+	background-size: 50px 50px;
+	transform: rotateX(45deg) translateY(-25%);
+	animation: grid-move 20s linear infinite;
+	mask-image: linear-gradient(
+		to bottom,
+		rgba(0, 0, 0, 0) 0%,
+		rgba(0, 0, 0, 1) 30%,
+		rgba(0, 0, 0, 1) 80%,
+		rgba(0, 0, 0, 0) 100%
+	);
+	filter: drop-shadow(0 0 5px rgba(34, 211, 238, 0.5)); /* Grid glow */
+}
+
+/* --- Particle/Stars Animation --- */
+.particles {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	pointer-events: none;
+	background-image:
+		radial-gradient(
+			1px 1px at 10% 10%,
+			rgba(34, 211, 238, 0.5) 50%,
+			transparent 100%
+		),
+		radial-gradient(
+			1px 1px at 20% 40%,
+			rgba(34, 211, 238, 0.5) 50%,
+			transparent 100%
+		),
+		radial-gradient(
+			2px 2px at 30% 70%,
+			rgba(34, 211, 238, 0.4) 50%,
+			transparent 100%
+		),
+		radial-gradient(
+			1px 1px at 40% 20%,
+			rgba(59, 130, 246, 0.5) 50%,
+			transparent 100%
+		),
+		radial-gradient(
+			1px 1px at 50% 60%,
+			rgba(59, 130, 246, 0.5) 50%,
+			transparent 100%
+		),
+		radial-gradient(
+			2px 2px at 60% 30%,
+			rgba(59, 130, 246, 0.4) 50%,
+			transparent 100%
+		),
+		radial-gradient(
+			1px 1px at 70% 80%,
+			rgba(168, 85, 247, 0.5) 50%,
+			transparent 100%
+		),
+		radial-gradient(
+			1px 1px at 80% 10%,
+			rgba(168, 85, 247, 0.5) 50%,
+			transparent 100%
+		),
+		radial-gradient(
+			1px 1px at 90% 50%,
+			rgba(168, 85, 247, 0.5) 50%,
+			transparent 100%
+		);
+	background-size: 500px 500px;
+	animation: particles-drift 60s linear infinite;
+	opacity: 0.6;
+}
+
+@keyframes particles-drift {
+	0% {
+		background-position: 0 0;
+	}
+	100% {
+		background-position: 500px 500px;
+	}
+}
+
+@keyframes grid-move {
+	0% {
+		transform: rotateX(45deg) translateY(0);
+	}
+	100% {
+		transform: rotateX(45deg) translateY(50px);
+	}
+}
+
+/* --- CRT Scanline Overlay --- */
+.crt-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 50;
+	pointer-events: none;
+	background:
+		linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%),
+		linear-gradient(
+			90deg,
+			rgba(255, 0, 0, 0.03),
+			rgba(0, 255, 0, 0.01),
+			rgba(0, 0, 255, 0.03)
+		);
+	background-size:
+		100% 3px,
+		3px 100%;
+	animation: crt-flicker 0.15s infinite;
+	opacity: 0.2;
+}
+
+@keyframes crt-flicker {
+	0% {
+		opacity: 0.15;
+	}
+	5% {
+		opacity: 0.12;
+	}
+	10% {
+		opacity: 0.15;
+	}
+}
+
+/* --- Glitch Effects --- */
+.glitch-text {
+	position: relative;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+	content: attr(data-text);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.glitch-text::before {
+	left: 2px;
+	text-shadow: -1px 0 var(--color-neon-purple);
+	clip: rect(44px, 450px, 56px, 0);
+	animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+	left: -2px;
+	text-shadow: -1px 0 var(--color-neon-cyan);
+	clip: rect(44px, 450px, 56px, 0);
+	animation: glitch-anim2 5s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+	0% {
+		clip: rect(12px, 9999px, 86px, 0);
+	}
+	20% {
+		clip: rect(54px, 9999px, 12px, 0);
+	}
+	40% {
+		clip: rect(76px, 9999px, 4px, 0);
+	}
+	60% {
+		clip: rect(5px, 9999px, 16px, 0);
+	}
+	80% {
+		clip: rect(66px, 9999px, 33px, 0);
+	}
+	100% {
+		clip: rect(89px, 9999px, 98px, 0);
+	}
+}
+
+@keyframes glitch-anim2 {
+	0% {
+		clip: rect(2px, 9999px, 46px, 0);
+	}
+	20% {
+		clip: rect(84px, 9999px, 2px, 0);
+	}
+	40% {
+		clip: rect(16px, 9999px, 64px, 0);
+	}
+	60% {
+		clip: rect(25px, 9999px, 96px, 0);
+	}
+	80% {
+		clip: rect(36px, 9999px, 13px, 0);
+	}
+	100% {
+		clip: rect(59px, 9999px, 48px, 0);
+	}
+}
+
+/* Utility classes for neon glow */
+.text-neon-cyan {
+	color: var(--color-neon-cyan);
+	text-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
+}
+.text-neon-blue {
+	color: var(--color-neon-blue);
+	text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+}
+.text-neon-purple {
+	color: var(--color-neon-purple);
+	text-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+}
+
+.border-neon-cyan {
+	border-color: var(--color-neon-cyan);
+	box-shadow: 0 0 10px rgba(34, 211, 238, 0.2);
+}
+
+.font-display {
+	font-family: var(--font-display);
+}
+.font-body {
+	font-family: var(--font-body);
 }

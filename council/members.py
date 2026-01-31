@@ -27,6 +27,7 @@ class CouncilMember:
         """
         formatted_forensics = json.dumps(forensic_data, indent=2)
         prompt = MASTER_PROMPT.format(
+            name=self.name,
             actual_user_claim=claim,
             media_type=media_type,
             actual_forensic_data_dump=formatted_forensics,
@@ -55,9 +56,9 @@ class Council:
     def __init__(self):
         self.client = LLMClient()
         self.members = [
-            CouncilMember("Model A", config.MODEL_A_NAME, self.client),
-            CouncilMember("Model B", config.MODEL_B_NAME, self.client),
-            CouncilMember("Model C", config.MODEL_C_NAME, self.client),
+            CouncilMember("The Analyst", config.MODEL_A_NAME, self.client),
+            CouncilMember("The Critic", config.MODEL_B_NAME, self.client),
+            CouncilMember("The Optimist", config.MODEL_C_NAME, self.client),
         ]
 
     def convene(
