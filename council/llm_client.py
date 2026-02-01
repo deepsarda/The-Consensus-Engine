@@ -21,7 +21,11 @@ class LLMClient:
         }
 
     def chat_completion(
-        self, model: str, messages: list, temperature: float = 0.7
+        self,
+        model: str,
+        messages: list,
+        temperature: float = 0.7,
+        response_schema: dict = None,
     ) -> dict:
 
         if not self.api_key:
@@ -47,9 +51,9 @@ class LLMClient:
             return response.json()
         except Exception as e:
             print(f"\033[91mError calling OpenRouter API for model {model}: {e}\033[0m")
-            return self.call_gemini_fallback(messages)
+            return self.call_gemini_fallback(messages, response_schema)
 
-    def call_gemini_fallback(self, messages: list) -> dict:
+    def call_gemini_fallback(self, messages: list, response_schema: dict = None) -> dict:
         """
         Fallback to Gemini API when OpenRouter fails.
         Mimics the OpenAI/OpenRouter response structure.
@@ -72,11 +76,15 @@ class LLMClient:
                 content = msg.get("content", "")
                 full_prompt += f"--- {role} ---\n{content}\n\n"
 
+            generation_config = {"response_mime_type": "application/json"}
+            if response_schema:
+                generation_config["response_schema"] = response_schema
+
             response = client.models.generate_content(
                 # model="gemini-2.5-flash",
                 model="gemini-3-flash-preview",
                 contents=full_prompt,
-                config={"response_mime_type": "application/json"},
+                config=generation_config,
             )
 
             if not response.text:

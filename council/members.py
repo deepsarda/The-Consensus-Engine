@@ -44,7 +44,37 @@ class CouncilMember:
             {"role": "user", "content": prompt},
         ]
 
-        response = self.client.chat_completion(self.model_id, messages)
+        response_schema = {
+            "type": "OBJECT",
+            "properties": {
+                "reasoning_steps": {
+                    "type": "ARRAY",
+                    "items": {
+                        "type": "OBJECT",
+                        "properties": {
+                            "step": {"type": "STRING"},
+                            "observation": {"type": "STRING"},
+                        },
+                        "required": ["step", "observation"],
+                    },
+                },
+                "conclusion": {"type": "STRING"},
+                "verdict": {"type": "STRING"},
+                "confidence_score": {"type": "INTEGER"},
+                "category": {"type": "STRING"},
+            },
+            "required": [
+                "reasoning_steps",
+                "conclusion",
+                "verdict",
+                "confidence_score",
+                "category",
+            ],
+        }
+
+        response = self.client.chat_completion(
+            self.model_id, messages, response_schema=response_schema
+        )
 
         if not response or "choices" not in response:
             return {"error": f"Model {self.name} failed to respond."}

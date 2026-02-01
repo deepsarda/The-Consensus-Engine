@@ -32,9 +32,13 @@ class ForensicAnalyzer:
 
         # search_res = self.reverse_image.analyze(media_path, claim_text)
 
+        search_res = gemini_res.get("citations", {"error": "No citations found"})
+
+        del gemini_res["citations"]
+
         return {
             "Deepfake_Detector": deepfake_res,
-            # "Reverse_Image_Search": search_res,
+            "Citations": search_res,
             "Metadata_Analysis": metadata_res,
             "Gemini_Vision": gemini_res,
             "Semantic_Alignment": clip_res,

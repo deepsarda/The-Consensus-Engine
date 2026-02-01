@@ -267,3 +267,29 @@ body {
 .font-body {
 	font-family: var(--font-body);
 }
+
+/* --- Custom Scrollbar --- */
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: #020617; /* Very dark slate/black matching bg */
+	border-left: 1px solid rgba(34, 211, 238, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+	background: rgba(34, 211, 238, 0.3); /* Cyan with low opacity */
+	border: 1px solid rgba(34, 211, 238, 0.5);
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: rgba(34, 211, 238, 0.6);
+	box-shadow: 0 0 10px rgba(34, 211, 238, 0.4);
+}
+
+::-webkit-scrollbar-corner {
+	background: transparent;
+}

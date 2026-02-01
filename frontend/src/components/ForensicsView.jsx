@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import React from "react";
 import ReactMarkdown from "react-markdown";
 
 // Helper to format keys (e.g., "fake_prob" -> "Fake Prob")
@@ -24,7 +23,10 @@ const DataNode = ({ value, depth = 0 }) => {
 		return (
 			<div className="space-y-1">
 				{value.map((item, idx) => (
-					<div key={idx} className="pl-2 border-l border-slate-700">
+					<div
+						key={`${idx}-${typeof item}`}
+						className="pl-2 border-l border-slate-700"
+					>
 						<DataNode value={item} depth={depth + 1} />
 					</div>
 				))}
@@ -53,11 +55,28 @@ const DataNode = ({ value, depth = 0 }) => {
 
 	// String handling - check for Markdown-like content or long text
 	if (typeof value === "string") {
-		// If it's a long text or contains newlines, render as markdown block
-		if (value.includes("\n") || value.length > 50) {
+		// If it's a long text, contains newlines, or looks like a link/markdown
+		if (
+			value.includes("\n") ||
+			value.length > 50 ||
+			(value.includes("[") && value.includes("]("))
+		) {
 			return (
 				<div className="prose prose-invert prose-xl max-w-none text-slate-300 bg-slate-950/30 p-2 rounded border border-slate-800/50 mt-1 max-h-48 overflow-y-auto">
-					<ReactMarkdown>{value}</ReactMarkdown>
+					<ReactMarkdown
+						components={{
+							a: ({ node, ...props }) => (
+								<a
+									{...props}
+									className="text-cyan-400 hover:text-cyan-300 underline"
+									target="_blank"
+									rel="noopener noreferrer"
+								/>
+							),
+						}}
+					>
+						{value}
+					</ReactMarkdown>
 				</div>
 			);
 		}
@@ -75,7 +94,7 @@ const ForensicCard = ({ title, data, delay }) => {
 		if (typeof data === "string") {
 			parsedData = JSON.parse(data);
 		}
-	} catch (e) {
+	} catch (_e) {
 		parsedData = { raw: data };
 	}
 
@@ -134,6 +153,7 @@ const ForensicsView = ({ data }) => {
 		<div className="relative">
 			<div className="p-4 border-b border-cyan-900/50 flex justify-between items-center mb-4">
 				<h4 className="font-display font-bold text-lg text-cyan-400 tracking-wider">
+					{/* // EVIDENCE_ANALYSIS_LOG */}
 					// EVIDENCE_ANALYSIS_LOG
 				</h4>
 				<div className="flex gap-2">

@@ -186,7 +186,7 @@
 		"ground_truth": {
 			"verdict": "Real",
 			"type": "Legit",
-			"explanation": "Real (Synthetic representation)."
+			"explanation": "Real."
 		}
 	},
 	{
@@ -196,7 +196,7 @@
 		"ground_truth": {
 			"verdict": "Real",
 			"type": "Legit",
-			"explanation": "Real (Synthetic representation)."
+			"explanation": "Real."
 		}
 	}
 ]

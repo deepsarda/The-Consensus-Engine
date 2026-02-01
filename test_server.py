@@ -3,6 +3,7 @@ import websockets
 import json
 import time
 
+
 async def handler(websocket):
     print("Client connected")
     try:
@@ -16,13 +17,13 @@ async def handler(websocket):
                 "type": "progress",
                 "step": "upload",
                 "status": "complete",
-                "message": "Image uploaded and processed."
+                "message": "Image uploaded and processed.",
             },
             {
                 "type": "progress",
                 "step": "forensics",
                 "status": "running",
-                "message": "Analyzing forensic evidence..."
+                "message": "Analyzing forensic evidence...",
             },
             {
                 "type": "result",
@@ -30,161 +31,153 @@ async def handler(websocket):
                 "data": {
                     "Deepfake_Detector": {
                         "tool": "Deepfake_Detector",
-                        "fake_prob": 0.1,
-                        "verdict": "Likely Real Camera Image"
+                        "fake_prob": 0.8035,
+                        "verdict": "Likely AI-Generated",
                     },
+                    "Citations": "- [deccanchronicle.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH7rBtl8uXuf_qm09-uu7fPaywNccFa41mrccYquTy22PBBhPAfZBXyDA4VN-SRYQaM4g3LmFaz3OHasMhOT271xnnmL3qnM4SPcePksYWqoNuyXxhW-k380YWu6vSKr6ql4FwE3jhcYB60X2EV7vLIadIJragT4kfUyxvdDQucoICHDpc9FxgQB7w5xlxYnuIkVyRdO64LyBhM1JDUvPo5JcnWRAEJ-wcN84L_bFd5FpGVgA==)\n- [indiatvnews.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG9Ti6dRqlImr81rs9Cy0GVtYaf2z6fkJwv16Bkcib4UimrfVrKcGjQmgFDB8KE5rywlPABFt7mi31A5BPPajGxV1lsI8uL0Ekiqgv9mMIELXKlRqeX1K9YiBwyaMsxg30K80KUDKuKdQQ18O8Wh5SWalcrWmE2MALyQK1744_CzeTBxgETHYa-wP2WsU1xThurIKr8SlwDReYI9jlF7TO3GBU9RjKKl_mLStIaLx-ml9ErFrXl6OV-iBVioGcWCQUOkR62)\n- [gulfnews.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEuhzXQnNF4oGyfl3sYVkUB2QOIiMeohIy-6VkGxEB7msu5esdunvjBmtXEtsHjV39rq8AntQ1RJ6BcwpJ040qvmWqwd0qRXrc6TtJxo7WrULgpfuQ-mnfl8V0_q2zLJ-JZt9UII9BWPmyZu4BEyPFJTx8PFWy8erf5cEGyK-_tsdqq4UCaKu-hqOg6e95qEX14huzSwrrxo8r_W8wG1hARJdVsrCA=)\n- [channelnewsasia.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQGOOO3w9jsVAa_hhiaMfzECU6HbAD6roUv3Y2BzQMiCmXEV6PW_lIZ8P8ulHLgNsOrSYzFozKSSHFIhXnrBGMu2W5ggWapR_T54EDyiFThTnZYjrhXeUH1YXY5X9bVgv7e9n8iOE7ditprURJoa1GC9vO_-_Yh0_Ks9ErCnA6fkrqPEFN7ppMmR8l8OplpruejCwA==)\n- [ctvnews.ca](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG5PTfLeF4xXWaRG6_geY4C-8xaWiGSc-iZks8mP5247MjrsMmXSP2i00MGp1bsHAVys5lmr6ikJmQVPMZGL200EWwoLVLmjO4PgS4VQA5V8QjinBcPDC7vW8-Jwg_VxHSCsBH-gq0yD0u0FdyLvWaVHao0GtSjURR74_LE39ifHIRiPyxj810CXmzibq3IWetsm2sjCkbRyn2cRfgMkw==)\n- [indiatimes.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQH9Rto3THGNL5acnQTU1CqLlUrtfgufwN0gXDM3bmgiNRiY0LwHzA760px1F4rTYhBFC3oJDf1Q4SZlmMm3lAzCWaVOr8OSC2cc2MBcU4VtxhevkQkLhd6mCm3krXiG_IwHZsInj5nc5LZorlKRtvjU_uqtzpQvSro2rHZSoHMKPi57Fw8XqcghmyyMqHx-1bHumpVB6M2Fptodbo-Ga0FYwvt_jA-z428l5LJYsEtDyY_-qMK62Uqu8AuBoouz5k5FqLOpBEomnmnZEhwUgw==)\n- [scmp.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQHgHrrKF8vBWaLI3-hVnetBnamlPN_wKWp4h_gcCc_ByLpfKmkKMvPCU1b3NDW4xnYTAaSKWuber1WnC9zGFRsgN6rmtj8CqnIJ4eRVPFtB8hHLIyOtwrMHMqkajOOpNBM6FRwHXBNAkBmcBZDSaFNWq5Sd_XKVMOTKvSuiz0N64bWcOyxto3X8J6dQEvRpuGMdtx-1NVUJQBXLAtbM88sq4B2m7JrkY9mPmwS4agsJ8qjkCnhhSA==)",
                     "Metadata_Analysis": {
                         "tool": "Metadata_Analyzer",
                         "metadata_found": False,
                         "data": {},
-                        "verdict": "No metadata found"
+                        "verdict": "No metadata found",
                     },
                     "Gemini_Vision": {
                         "tool": "Gemini_Image_Describer",
-                        "description": "This image is a low-resolution, wide-angle photograph capturing a scene that appears to be a shark swimming in floodwaters on a highway. It is famously known as a doctored image (a composite) that frequently circulates during major hurricanes.\n\n### 1. The Foreground (Lower Half)\n*   **The Shark:** The central focus is a large shark, likely a Great White based on the silhouette, swimming from the right toward the bottom left. \n    *   **Color:** Dark charcoal grey to muddy brown. \n    *   **Anatomy visible:** The large dorsal fin breaks the surface of the water. The pectoral fin on the right side is visible just beneath the surface. The caudal fin (tail) is visible at the bottom left, angled upward as if in mid-stroke.\n    *   **Texture:** The shark’s skin appears smooth and matte where it breaks the surface, though heavily pixelated due to low image quality.\n*   **The Water:** The shark is submerged in murky, turbulent water.\n    *   **Color:** A blend of olive green, brownish-grey, and dull silver. It lacks transparency.\n    *   **Texture:** The surface is covered in small, choppy ripples and white-capped disturbances, suggesting movement either from the shark or from wind and rain. The water reflects the flat, grey sky.\n*   **The Car Mirror (Right Edge):** The extreme right edge of the frame is dominated by the side-view mirror of a vehicle.\n    *   **Object:** A black, rounded plastic mirror housing. \n    *   **Reflection:** Inside the mirror, there is a blurry reflection of a white or silver vehicle (likely the car the photographer is in) and a sliver of the road behind. Bright, blown-out highlights are visible in the reflection, contrasting sharply with the dark mirror casing.\n\n### 2. The Middle Ground (Center)\n*   **The Concrete Barrier:** A long, horizontal line of concrete “Jersey barriers” runs across the center of the image, separating the flooded road from whatever lies beyond.\n    *   **Color:** Light grey, bleached by the flat lighting.\n    *   **Structure:** They are segmented into individual blocks. You can see vertical seams where the blocks meet.\n    *   **Texture:** The surface looks rough and weathered, with darker staining near the water line, suggesting the water may have been higher or is splashing against them.\n\n### 3. The Background (Upper Half)\n*   **The Wall/Structure:** Behind the concrete barriers is a massive, dark, vertical structure that occupies the top third of the frame.\n    *   **Texture:** It appears to be a tiered or gridded retaining wall, possibly made of stone blocks or sound-dampening panels. It has a repetitive, textured pattern of small dark squares or rectangles.\n    *   **Color:** Very dark grey, almost black in the shadows.\n*   **The Sky:** At the very top right corner, there is a small triangular sliver of a pale, overcast sky. \n    *   **Color:** Near-white or very light grey.\n*   **Small Detail (Far Top Right):** There is a tiny, blurry vertical shape that appears to be red and white. This could be a distant flag or a construction sign, but it is too pixelated to identify with certainty.\n\n### 4. Lighting and Color Palette\n*   **Lighting:** The lighting is extremely flat and diffused, typical of a heavy overcast or stormy day. There are no distinct shadows cast by the shark or the barriers. The primary light source is the sky itself, creating a dull, metallic sheen on the surface of the water.\n*   **Color Palette:** Dominated by a desaturated, \"muddy\" palette. The primary colors are greys (concrete, wall, mirror), brownish-greens (water), and the dark grey-brown of the shark. \n\n### 5. Technical Quality and Potential Anomalies\n*   **Quality:** The image is low-resolution with significant JPEG compression artifacts. This causes \"blocking\" (pixel squares) around high-contrast areas like the shark's fin and the car mirror.\n*   **Anomalies (The Hoax Evidence):** \n    *   **Perspective:** The shark appears disproportionately large compared to the depth of the water implied by the concrete barriers.\n    *   **The Wake:** While there are ripples, there is no significant displacement of water or \"V\" shaped wake behind the dorsal fin, which would be expected for a shark of that size moving through shallow water.\n    *   **Lighting Mismatch:** The lighting on the shark's back is slightly more directional than the flat, ambient light hitting the water, suggesting it was cut from a different photo (it originated from a 2005 *Africa Geographic* photo of a shark following a kayaker).\n    *   **The \"Shadow\":** There is a dark area beneath the shark that looks more like a drop-shadow from a photo editing program than a natural refraction of light through murky floodwater.\n*   **Text:** There is no visible text in the image.",
-                        "verdict": "Detailed description generated"
+                        "description": 'As a Forensic Image Analyst, I have examined the provided image and cross-referenced it with real-time reports and historical databases. Below is the detailed forensic report.\n\n### **Phase 1: Visual Forensics**\n\n**General Composition:**\nThe image depicts a massive, billowing plume of dense, black smoke rising into a hazy, pale sky. The smoke originates from a point on the horizon behind a densely packed urban cityscape.\n\n*   **Smoke/Lighting:** The smoke is opaque and textured, suggesting a high-intensity fire involving hydrocarbons or petrochemicals. The lighting is diffused, consistent with late afternoon or a smoggy day. The primary light source is to the upper right, casting soft shadows on the left side of the smoke column.\n*   **Architecture (Geolocators):** The foreground shows a cityscape with low-to-mid-rise residential or commercial buildings. The structures are primarily flat-roofed, light-colored (white, beige, or light grey), and typical of Middle Eastern or Persian Gulf architectural styles (e.g., Tehran or Bandar Abbas). However, no specific landmark (like the Bandar Abbas Port gantry cranes) is clearly visible to confirm the exact location as the port itself.\n*   **Temporal Indicators:** The resolution is low, obscuring specific car models or signs. However, the lack of modern glass skyscrapers in the immediate vicinity suggests an older or more suburban district. \n*   **Manipulation Check:** While the image does not show obvious signs of AI generation (e.g., warped structures or impossible physics), its "standard" appearance—a generic mushroom cloud of smoke over a generic city—is a common trait of **file photos** used by news outlets to illustrate breaking news before actual footage is available.\n\n---\n\n### **Phase 2: Contextual Search**\n\n**1. Earliest Known Source & Context:**\nMy search confirms that this specific image is a **file photo** and does not depict the January 31, 2026, explosion in Bandar Abbas. \n*   **Original Context:** Similar images of thick black smoke over Iranian cities have been documented in previous years. For example, a Reuters file photo dated **June 2, 2021**, shows a similar plume from a refinery fire in southern **Tehran**. \n*   **Reused for Current Event:** Several news agencies (e.g., *Asharq Al-Awsat* and *Al-Monitor*) published this or very similar images on **January 31, 2026**, to illustrate live updates regarding Bandar Abbas, explicitly labeling them as **"File Photo"** or **"Symbolic Image."**\n\n**2. The 2026 Bandar Abbas Incident:**\nAn explosion *did* occur in Bandar Abbas on **January 31, 2026**, but the visual provided does not accurately represent it:\n*   **The Reality:** The actual event involved an explosion at an **eight-storey residential building** on Moallem Boulevard. \n*   **Cause:** Local fire officials (including Chief Mohammad Amin Lyaghat) identified the cause as a **gas leak** and buildup within the building.\n*   **Damage:** The blast blew out the building\'s facade and damaged nearby shops and cars. It did *not* produce the massive, sky-filling black smoke plume seen in your image, which would be characteristic of a large-scale fuel or port facility fire.\n\n**3. Debunking Status:**\n*   Fact-checkers and local officials (such as the Governor of Robat Karim) noted that similar images circulating on social media on Jan 31, 2026, were being falsely attributed to "multiple explosions" or "port attacks." \n*   Specifically, a report from the *Daily Express* highlighted that images of smoke rising from **Parand** (near Tehran) were being shared alongside the Bandar Abbas news but were debunked as a localized reed fire or old footage.\n\n### **Final Verdict**\n**MISLEADING.** The claim that an explosion occurred in Bandar Abbas is **true** (Jan 31, 2026), but the **image is unrelated**. It is a file photo of a previous, much larger industrial fire (likely in Tehran) and is being used as a placeholder. The actual Bandar Abbas incident was a residential building gas explosion, not a massive port-wide disaster as the image implies.',
+                        "verdict": "Detailed description generated",
                     },
                     "Semantic_Alignment": {
                         "tool": "Semantic_Alignment_CLIP",
-                        "similarity_score": 0.3405,
-                        "verdict": "High Visual-Text Consistency"
+                        "similarity_score": 0.2777,
+                        "verdict": "High Visual-Text Consistency",
                     },
                     "ELA_Analysis": {
                         "tool": "ELA_Analysis",
-                        "max_difference": 7,
-                        "mean_error_level": 0.42,
-                        "verdict": "No Obvious Manipulation Artifacts (ELA)"
-                    },
-                    "Frequency_Analysis": {
-                        "tool": "Frequency_Analysis",
-                        "anomaly_score": 1,
-                        "details": [
-                            "High-Freq Energy Ratio: 0.94",
-                            "Max HF Anomaly (Z-score): 3.38",
-                            "Unusually high high-frequency energy"
-                        ],
-                        "verdict": "Noisy/High-Texture Image",
-                        "hf_ratio": 0.9381
+                        "max_difference": 2,
+                        "mean_error_level": 0.01,
+                        "verdict": "No Obvious Manipulation Artifacts (ELA)",
                     },
                     "Text_Forensics": {
                         "tool": "Text_Forensics",
-                        "risk_score": 2,
-                        "verdict": "Slightly Emotive/Subjective",
-                        "triggers": [
-                            "Imitates 'Breaking News' format"
-                        ],
+                        "risk_score": 0,
+                        "verdict": "Neutral/Objective Tone",
+                        "triggers": [],
                         "ai_analysis": {
-                            "top_label": "Fear-mongering",
-                            "top_confidence": 0.1903,
+                            "top_label": "Objective and Factual",
+                            "top_confidence": 0.1785,
                             "all_scores": {
-                                "Fear-mongering": 0.19,
-                                "Objective and Factual": 0.068,
-                                "Satire": 0.065,
-                                "Clickbait and Sensationalist": 0.01,
-                                "Politically Biased": 0.001
-                            }
-                        }
-                    }
-                }
+                                "Objective and Factual": 0.178,
+                                "Politically Biased": 0.145,
+                                "Fear-mongering": 0.13,
+                                "Clickbait and Sensationalist": 0.044,
+                                "Satire": 0.021,
+                            },
+                        },
+                    },
+                },
             },
             {
                 "type": "progress",
                 "step": "council",
                 "status": "running",
-                "message": "Convening the Council of LLMs..."
+                "message": "Convening the Council of LLMs...",
             },
             {
                 "type": "result",
                 "step": "council",
                 "data": [
                     {
-                        "member_name": "Model A",
+                        "member_name": "The Critic",
                         "output": {
                             "reasoning_steps": [
                                 {
                                     "step": "Authenticity Check",
-                                    "observation": "Deepfake_Detector (0.1) and Frequency_Analysis indicate the image is likely a composite of real photographic elements rather than a purely synthetic Generative AI (GAN/Diffusion) creation."
-                                },
-                                {
-                                    "step": "Visual Content Verification",
-                                    "observation": "Gemini_Vision identifies the image as a famous 'hoax' composite. While Semantic_Alignment (0.34) confirms the image contains a shark in water, the visual evidence (Jersey barriers, car mirror) indicates a highway, not a 'subway station' as claimed."
-                                },
-                                {
-                                    "step": "Anomaly Detection",
-                                    "observation": "Gemini_Vision notes a lighting mismatch on the shark's back and the lack of a 'wake' or water displacement, confirming the shark was digitally spliced into the floodwater (Cheapfake)."
-                                },
-                                {
-                                    "step": "Historical Context",
-                                    "observation": "Forensic analysis confirms this is the 'Street Shark' hoax, which originated from a 2005 Africa Geographic photo of a shark following a kayaker, repurposed for various storms since 2011."
-                                }
-                            ],
-                            "conclusion": "The claim is misinformation. While the image is not a Deepfake (AI-generated), it is a digitally manipulated 'Cheapfake' composite. Furthermore, the claim incorrectly identifies the location as a subway station when visual cues confirm it is a flooded road. This specific image is a known recurring internet hoax.",
-                            "verdict": "Misinformation",
-                            "confidence_score": 99,
-                            "category": "Digitally Manipulated / Composite Media"
-                        }
-                    },
-                    {
-                        "member_name": "Model C",
-                        "output": {
-                            "reasoning_steps": [
-                                {
-                                    "step": "AI Generative Analysis",
-                                    "observation": "Deepfake_Detector (0.1) and Frequency_Analysis indicate the image is not an AI-generated (GAN or Diffusion) piece, but rather a traditional digital photograph."
-                                },
-                                {
-                                    "step": "Detailed Visual Forensic Analysis",
-                                    "observation": "Gemini_Vision identifies the image as a known historical hoax. Key anomalies include a 'drop-shadow' under the shark inconsistent with water refraction and a lighting mismatch between the shark and the environment. It identifies the shark source as a 2005 'Africa Geographic' photograph."
-                                },
-                                {
-                                    "step": "Semantic & Contextual Verification",
-                                    "observation": "The claim states the location is a 'subway station'. However, Gemini_Vision identifies highway-specific elements such as 'Jersey barriers' and a car side-view mirror, proving the setting is a flooded road, not a subway."
-                                },
-                                {
-                                    "step": "Technical Tool Limitations",
-                                    "observation": "ELA_Analysis shows no results due to high JPEG compression/low resolution, which often masks splicing artifacts in older 'Cheapfakes'. Semantic Alignment is high because the image does contain a shark and water, though the context is false."
-                                },
-                                {
-                                    "step": "Intent and History",
-                                    "observation": "The claim uses 'Breaking' (Text_Forensics) to create urgency. This image is a persistent internet urban legend used during almost every major flooding event (e.g., Hurricane Irene, Harvey, Ian)."
-                                }
-                            ],
-                            "conclusion": "The claim is false. The image is a 'Cheapfake'—a manual digital composite created by splicing a 2005 photograph of a Great White shark onto a photo of a flooded highway. Furthermore, the claim incorrectly identifies the location as a subway station when visual cues (car mirrors, highway barriers) confirm it is a road.",
-                            "verdict": "Misinformation",
-                            "confidence_score": 99,
-                            "category": "Doctored Media / Cheapfake"
-                        }
-                    },
-                    {
-                        "member_name": "Model B",
-                        "output": {
-                            "reasoning_steps": [
-                                {
-                                    "step": "Authenticity Check",
-                                    "observation": "Deepfake_Detector indicates the image is likely real (score 0.1). Frequency_Analysis shows high-frequency energy but does not flag synthetic artifacts. Gemini_Vision explicitly identifies this as a known composite image from past hurricane hoaxes."
+                                    "observation": "Deepfake_Detector flags the image with a score of 0.8035, indicating it is likely AI-generated. This is a significant red flag for synthetic content.",
                                 },
                                 {
                                     "step": "Content Verification",
-                                    "observation": "Gemini_Vision provides detailed analysis showing the shark image is a doctored composite. It notes perspective issues, lack of natural wake, lighting mismatch, and a drop-shadow effect - all classic signs of digital manipulation. The shark was originally from a 2005 Africa Geographic photo."
+                                    "observation": "Gemini_Vision reveals the image is a file photo from a previous event (likely a 2021 Tehran refinery fire), not the January 31, 2026, Bandar Abbas explosion. The actual incident involved a residential building gas explosion, not a massive port fire.",
                                 },
                                 {
-                                    "step": "Context Analysis",
-                                    "observation": "Semantic_Alignment shows high visual-text consistency (0.3405), meaning the image does show a shark in water. However, Gemini_Vision reveals this is a known fake that has been debunked repeatedly during hurricane events."
+                                    "step": "Contextual Mismatch",
+                                    "observation": "Semantic_Alignment shows high visual-text consistency (0.2777), but Gemini_Vision confirms the image does not depict the claimed event. This is a clear case of out-of-context media reuse.",
                                 },
-                                "step ",
-                                "Intent Analysis",
-                                "observation ",
-                                "Text_Forensics shows low risk score (2) but identifies 'Breaking News' format imitation, suggesting attempt to create urgency."
-                            ]
-                        }
-                    }
-                ]
+                                {
+                                    "step": "Intent Analysis",
+                                    "observation": "Text_Forensics shows a neutral tone with no emotional manipulation triggers, suggesting the misleading use of the image may not be intentional but rather a placeholder error by news agencies.",
+                                },
+                            ],
+                            "conclusion": "The image is AI-generated and unrelated to the claimed event. It is a file photo from a previous incident, being used out of context to illustrate the Bandar Abbas explosion. The claim itself is partially true (an explosion occurred), but the visual evidence is misleading.",
+                            "verdict": "Misinformation",
+                            "confidence_score": 95,
+                            "category": "Out-of-Context Media Reuse with Synthetic Content",
+                        },
+                    },
+                    {
+                        "member_name": "The Analyst",
+                        "output": {
+                            "reasoning_steps": [
+                                {
+                                    "step": "Authenticity Check",
+                                    "observation": "Deepfake Detector suggests high probability of AI-generation (0.8035), but ELA shows no manipulation artifacts. Gemini Vision confirms this is a real file photo from a previous event (2021 Tehran refinery fire), not current AI generation.",
+                                },
+                                {
+                                    "step": "Content Match Analysis",
+                                    "observation": "Semantic Alignment shows high consistency (0.2777) between the image (massive black smoke plume) and claim text (explosion at port). However, Gemini Vision reveals this is misleading visual match - actual Bandar Abbas incident was a residential gas explosion without massive smoke.",
+                                },
+                                {
+                                    "step": "Context Verification",
+                                    "observation": "Critical mismatch: Image shows industrial-scale fire (historical file photo), while actual event was residential gas explosion (verified by local officials). Gemini confirms this image is being reused as placeholder with false implication.",
+                                },
+                                {
+                                    "step": "Intent Analysis",
+                                    "observation": "Text Forensics shows neutral tone (risk score 0), but image choice creates sensationalism through visual exaggeration of event scale. Citations show multiple outlets used similar file photos, creating false narrative amplification.",
+                                },
+                            ],
+                            "conclusion": "The image is authentic but historically miscontextualized - it depicts a different, larger-scale industrial fire from 2021 being reused to exaggerate a 2026 residential gas explosion. This creates false implication of port attack/major disaster.",
+                            "verdict": "Misinformation",
+                            "confidence_score": 90,
+                            "category": "Out-of-Context Media Reuse with Visual Exaggeration",
+                        },
+                    },
+                    {
+                        "member_name": "The Optimist",
+                        "output": {
+                            "reasoning_steps": [
+                                {
+                                    "step": "Authenticity Check",
+                                    "observation": "Deepfake_Detector flags potential AI-generation (Score: 0.8035), but ELA_Analysis shows no manipulation artifacts. Gemini_Vision confirms this is a REAL file photo from 2021, indicating a possible false positive in deepfake detection.",
+                                },
+                                {
+                                    "step": "Content Match",
+                                    "observation": "Semantic_Alignment (0.2777) confirms the image shows an explosion in an Iranian city, visually aligning with the claim's text description.",
+                                },
+                                {
+                                    "step": "Context Verification",
+                                    "observation": "CRITICAL: Gemini_Vision reveals this image is a 2021 file photo of a Tehran refinery fire. The actual Jan 2026 Bandar Abbas incident involved a residential gas leak explosion without massive smoke plumes.",
+                                },
+                                {
+                                    "step": "Intent Analysis",
+                                    "observation": "Text_Forensics shows neutral/objective tone (Risk Score: 0), suggesting no deliberate emotional manipulation in the text itself.",
+                                },
+                                {
+                                    "step": "Source Verification",
+                                    "observation": "Citations point to legitimate news outlets, but Gemini_Vision notes they typically label this image as 'file photo' when used in current coverage.",
+                                },
+                            ],
+                            "conclusion": "The image authentically shows an explosion but predates the claimed event by 5 years and misrepresents the scale/nature of the actual incident (residential gas leak vs. industrial-scale fire). While the text claim about an explosion is factually true, the image creates false context about severity and location.",
+                            "verdict": "Misinformation",
+                            "confidence_score": 90,
+                            "category": "Out-of-Context Media Reuse (File Photo Misapplication)",
+                        },
+                    },
+                ],
             },
             {
                 "type": "progress",
                 "step": "judge",
                 "status": "running",
-                "message": "The Adjudicator is deliberating..."
+                "message": "The Adjudicator is deliberating...",
             },
             {
                 "type": "result",
@@ -194,31 +187,28 @@ async def handler(websocket):
                     "output": {
                         "model_evaluations": [
                             {
-                                "model": "Model A",
-                                "status": "KEEP",
-                                "reason": "Accurately utilized the Gemini_Vision data to identify the specific 'Street Shark' hoax. Correctly interpreted the Deepfake_Detector score (0.1) to conclude it is a composite/cheapfake rather than a Generative AI creation. Properly identified the contradiction between the claim (subway) and visual evidence (highway)."
-                            },
-                            {
-                                "model": "Model C",
-                                "status": "KEEP",
-                                "reason": "Provided a highly detailed synthesis of all tools. Correctly identified the historical source of the shark (2005 Africa Geographic) and explained why ELA analysis was inconclusive due to JPEG artifacts. Correctly identified the 'Breaking News' tactic from the Text_Forensics tool."
-                            },
-                            {
-                                "model": "Model B",
+                                "model": "The Critic",
                                 "status": "DISCARD",
-                                "reason": "The output is structurally malformed and incomplete. It failed to provide a final conclusion, verdict, or confidence score, and the reasoning steps broke into disconnected strings at the end."
-                            }
+                                "reason": "Incorrectly claims image is AI-generated despite Gemini_Vision identifying it as a real file photo. Violates guideline to ignore Deepfake_Detector for non-face images.",
+                            },
+                            {
+                                "model": "The Analyst",
+                                "status": "KEEP",
+                                "reason": "Correctly references ELA_Analysis and Gemini_Vision findings about historical authenticity. Properly contextualizes forensic evidence without hallucinations.",
+                            },
+                            {
+                                "model": "The Optimist",
+                                "status": "KEEP",
+                                "reason": "Accurately identifies Deepfake_Detector false positive for non-face image. Cites Semantic_Alignment and Gemini_Vision evidence appropriately.",
+                            },
                         ],
                         "final_verdict": "Misinformation",
-                        "aggregated_confidence": 99,
-                        "explanation": "The claim that a shark is swimming in a flooded subway station is false. Forensic analysis and visual verification confirm this is the 'Street Shark' hoax, a famous digital composite ('Cheapfake') that has circulated since at least 2011. While the Deepfake_Detector confirms the image is not purely AI-generated (GAN/Diffusion), Gemini_Vision identifying the 2005 'Africa Geographic' source photograph proves the shark was spliced in. Furthermore, the visual evidence—specifically the 'Jersey barriers' and car side-view mirror—proves the setting is a flooded highway, directly contradicting the claim that the location is a subway station. Technical anomalies such as lighting mismatches on the shark's dorsal fin and a lack of a physical wake further confirm the manipulation."
-                    }
-                }
+                        "aggregated_confidence": 90,
+                        "explanation": "## Verdict: **Misattributed Media**\n\nThe media is **real/authentic**, but the caption/context is false.\n\n### Forensic Breakdown\n\n* **True Origin:** This image shows a **2021 refinery fire in Tehran** ([gulfnews.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEuhzXQnNF4oGyfl3sYVkUB2QOIiMeohIy-6VkGxEB7msu5esdunvjBmtXEtsHjV39rq8AntQ1RJ6BcwpJ040qvmWqwd0qRXrc6TtJxo7WrULgpfuQ-mnfl8V0_q2zLJ-JZt9UII9BWPmyZu4BEyPFJTx8PFWy8erf5cEGyK-_tsdqq4UCaKu-hqOg6e95qEX14huzSwrrxo8r_W8wG1hARJdVsrCA=)), as verified by:\n  - Architectural analysis of Middle Eastern buildings\n  - News agency records labeling this as a file photo\n\n* **False Claim:** Presented as showing the **January 31, 2026, Bandar Abbas explosion** which was:\n  - A **gas leak** in an 8-story residential building ([ctvnews.ca](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQG5PTfLeF4xXWaRG6_geY4C-8xaWiGSc-iZks8mP5247MjrsMmXSP2i00MGp1bsHAVys5lmr6ikJmQVPMZGL200EWwoLVLmjO4PgS4VQA5V8QjinBcPDC7vW8-Jwg_VxHSCsBH-gq0yD0u0FdyLvWaVHao0GtSjURR74_LE39ifHIRiPyxj810CXmzibq3IWetsm2sjCkbRyn2cRfgMkw==))\n  - Produced localized damage **without massive smoke plumes**\n\n### Why This Matters\n\nThis **out-of-context reuse** exaggerates a real incident (Bandar Abbas gas explosion) by implying:\n1. Industrial-scale destruction\n2. Port facility involvement\n3. Terrorism/national security implications\n\n_Confidence: 90% (based on 2 valid models)_",
+                    },
+                },
             },
-            {
-                "type": "complete",
-                "message": "Analysis complete."
-            }
+            {"type": "complete", "message": "Analysis complete."},
         ]
 
         for msg in messages:
@@ -228,10 +218,12 @@ async def handler(websocket):
     except websockets.exceptions.ConnectionClosed:
         print("Client disconnected")
 
+
 async def main():
     async with websockets.serve(handler, "localhost", 8000):
         print("Server started on ws://localhost:8000")
         await asyncio.Future()  # Run forever
+
 
 if __name__ == "__main__":
     asyncio.run(main())

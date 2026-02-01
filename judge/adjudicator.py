@@ -88,7 +88,36 @@ class JudgeAgent:
             {"role": "user", "content": prompt},
         ]
 
-        response = self.client.chat_completion(self.model, messages)
+        response_schema = {
+            "type": "OBJECT",
+            "properties": {
+                "model_evaluations": {
+                    "type": "ARRAY",
+                    "items": {
+                        "type": "OBJECT",
+                        "properties": {
+                            "model": {"type": "STRING"},
+                            "status": {"type": "STRING"},
+                            "reason": {"type": "STRING"},
+                        },
+                        "required": ["model", "status", "reason"],
+                    },
+                },
+                "final_verdict": {"type": "STRING"},
+                "aggregated_confidence": {"type": "NUMBER"},
+                "explanation": {"type": "STRING"},
+            },
+            "required": [
+                "model_evaluations",
+                "final_verdict",
+                "aggregated_confidence",
+                "explanation",
+            ],
+        }
+
+        response = self.client.chat_completion(
+            self.model, messages, response_schema=response_schema
+        )
 
         if not response or "choices" not in response:
             return {"error": "Judge failed to adjudicate."}
