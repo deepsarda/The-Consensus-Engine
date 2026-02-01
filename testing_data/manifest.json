@@ -1,0 +1,202 @@
+[
+	{
+		"id": 1,
+		"image_path": "ai_ceo_1769908705493.png",
+		"claim": "New Tech Corp CEO announced.",
+		"ground_truth": {
+			"verdict": "Fake",
+			"type": "Deepfake",
+			"explanation": "AI generated face."
+		}
+	},
+	{
+		"id": 2,
+		"image_path": "melting_hands_speech_1769908730720.png",
+		"claim": "Senator Smith's impassioned speech.",
+		"ground_truth": {
+			"verdict": "Fake",
+			"type": "Deepfake",
+			"explanation": "AI generated artifacts (fingers)."
+		}
+	},
+	{
+		"id": 3,
+		"image_path": "impossible_building_1769908747560.png",
+		"claim": "New physics-defying museum in Dubai.",
+		"ground_truth": {
+			"verdict": "Fake",
+			"type": "Deepfake",
+			"explanation": "AI generated impossible architecture."
+		}
+	},
+	{
+		"id": 4,
+		"image_path": "perfect_crowd_1769908764979.png",
+		"claim": "Protests erupt in Capital City.",
+		"ground_truth": {
+			"verdict": "Fake",
+			"type": "Deepfake",
+			"explanation": "AI generated repeating faces."
+		}
+	},
+	{
+		"id": 5,
+		"image_path": "celebrity_chef_lookalike_1769908789885.png",
+		"claim": "Gordon Ramsay cooking at a local shelter.",
+		"ground_truth": {
+			"verdict": "Fake",
+			"type": "Deepfake",
+			"explanation": "AI generated lookalike."
+		}
+	},
+	{
+		"id": 6,
+		"image_path": "alien_artifact_mars_1769908803980.png",
+		"claim": "NASA finds evidence of life on Mars.",
+		"ground_truth": {
+			"verdict": "Fake",
+			"type": "Deepfake",
+			"explanation": "AI generated object."
+		}
+	},
+	{
+		"id": 7,
+		"image_path": "future_tank_hover_1769908820997.png",
+		"claim": "Leaked photo of US Army's new hovering tank.",
+		"ground_truth": {
+			"verdict": "Fake",
+			"type": "Deepfake",
+			"explanation": "AI generated sci-fi object."
+		}
+	},
+	{
+		"id": 8,
+		"image_path": "forest_fire.jpg",
+		"claim": "Wildfires currently destroying California.",
+		"ground_truth": {
+			"verdict": "Misinformation",
+			"type": "Cheapfake",
+			"explanation": "Real image of historical fire used out of context."
+		}
+	},
+	{
+		"id": 9,
+		"image_path": "empty_groceries.jpg",
+		"claim": "Food shortages begin in London.",
+		"ground_truth": {
+			"verdict": "Misinformation",
+			"type": "Cheapfake",
+			"explanation": "Real image used out of context."
+		}
+	},
+	{
+		"id": 10,
+		"image_path": "riot_police.jpg",
+		"claim": "Police attacking peaceful protesters right now.",
+		"ground_truth": {
+			"verdict": "Misinformation",
+			"type": "Cheapfake",
+			"explanation": "Real image used out of context."
+		}
+	},
+	{
+		"id": 11,
+		"image_path": "street_shark_1769909498778.png",
+		"claim": "Shark swimming in subway station after the hurricane.",
+		"ground_truth": {
+			"verdict": "Misinformation",
+			"type": "Cheapfake",
+			"explanation": "Composite image (Hoax recreation)."
+		}
+	},
+	{
+		"id": 12,
+		"image_path": "snow_sahara.jpg",
+		"claim": "Climate change causes snow in Sahara today.",
+		"ground_truth": {
+			"verdict": "Misinformation",
+			"type": "Cheapfake",
+			"explanation": "Real historical photo of rare event used out of context."
+		}
+	},
+	{
+		"id": 13,
+		"image_path": "starlink_train.jpg",
+		"claim": "Alien invasion fleet arriving.",
+		"ground_truth": {
+			"verdict": "Misinformation",
+			"type": "Cheapfake",
+			"explanation": "Misinterpretation of reputable satellite train."
+		}
+	},
+	{
+		"id": 14,
+		"image_path": "pizza.jpg",
+		"claim": "Dinner is served.",
+		"ground_truth": {
+			"verdict": "Real",
+			"type": "Legit",
+			"explanation": "Real photo."
+		}
+	},
+	{
+		"id": 15,
+		"image_path": "sunset.jpg",
+		"claim": "Beautiful sunset captured this evening.",
+		"ground_truth": {
+			"verdict": "Real",
+			"type": "Legit",
+			"explanation": "Real photo."
+		}
+	},
+	{
+		"id": 16,
+		"image_path": "cat.jpg",
+		"claim": "My pet cat sleeping.",
+		"ground_truth": {
+			"verdict": "Real",
+			"type": "Legit",
+			"explanation": "Real photo."
+		}
+	},
+	{
+		"id": 17,
+		"image_path": "traffic_jam.jpg",
+		"claim": "Heavy traffic on I-95.",
+		"ground_truth": {
+			"verdict": "Real",
+			"type": "Legit",
+			"explanation": "Real photo."
+		}
+	},
+	{
+		"id": 18,
+		"image_path": "mountain.jpg",
+		"claim": "View from my hike.",
+		"ground_truth": {
+			"verdict": "Real",
+			"type": "Legit",
+			"explanation": "Real photo."
+		}
+	},
+	{
+		"id": 19,
+		"image_path": "real_laptop_code.png",
+		"claim": "Working on the new python script.",
+		"ground_truth": {
+			"verdict": "Real",
+			"type": "Legit",
+			"explanation": "Real (Synthetic representation)."
+		}
+	},
+	{
+		"id": 20,
+		"image_path": "real_beach_sunny.png",
+		"claim": "Vacation at the beach.",
+		"ground_truth": {
+			"verdict": "Real",
+			"type": "Legit",
+			"explanation": "Real (Synthetic representation)."
+		}
+	}
+]
