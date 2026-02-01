@@ -11,11 +11,34 @@ const InputSection = ({ onSubmit }) => {
 		const file = e.target.files[0];
 		if (file) {
 			setImage(file);
-			const reader = new FileReader();
-			reader.onloadend = () => {
-				setPreview(reader.result);
-			};
-			reader.readAsDataURL(file);
+			if (file.type.startsWith("video/")) {
+				const video = document.createElement("video");
+				video.preload = "metadata";
+				video.onloadedmetadata = () => {
+					video.currentTime = 0.1; // Small offset to avoid black frames
+				};
+				video.onseeked = () => {
+					const canvas = document.createElement("canvas");
+					canvas.width = video.videoWidth;
+					canvas.height = video.videoHeight;
+					const ctx = canvas.getContext("2d");
+					ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+					setPreview(canvas.toDataURL("image/jpeg"));
+					URL.revokeObjectURL(video.src);
+				};
+				video.onerror = () => {
+					console.error("Error loading video");
+					alert("Failed to process video file.");
+					URL.revokeObjectURL(video.src);
+				};
+				video.src = URL.createObjectURL(file);
+			} else {
+				const reader = new FileReader();
+				reader.onloadend = () => {
+					setPreview(reader.result);
+				};
+				reader.readAsDataURL(file);
+			}
 		}
 	};
 
@@ -82,7 +105,7 @@ const InputSection = ({ onSubmit }) => {
 								ref={fileInputRef}
 								onChange={handleImageChange}
 								className="hidden"
-								accept="image/*"
+								accept="image/*,video/*"
 							/>
 
 							<AnimatePresence mode="wait">
